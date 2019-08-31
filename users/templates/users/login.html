@@ -1,0 +1,19 @@
+{% extends "dashboard/baseforms.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+		<form method="POST" style="background-color:white">
+			{% csrf_token %}
+			<fieldset class="form-group">
+				<legend class="broder-bottom mb-4"><h3>Login</h3></legend>
+				{{form|crispy}}
+			</fieldset>
+			<div class="form-group">
+				<button class="btn btn-outline-info" type="submit"><h3>Log In</h3></button>
+			</div>
+		</form>
+		<div class="border-top pt-3" style="background-color: white;">
+			<!--small class="text-muted"-->
+				Need An Account?<a class="ml-2" href="{% url 'userregister' %}">Sign Up Now</a>
+			<!--/small-->
+		</div>
+{% endblock content%}

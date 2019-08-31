@@ -1,0 +1,33 @@
+{% extends "dashboard/base.html" %}
+{% load crispy_forms_tags %}
+{% load dashboard_tags %}
+{% block content %}	
+	<div id="dashboard_header_container" class="ic-Dashboard-header">
+		<h1 class="ic-Dashboard-header__title">Assignment Details</h1>
+	</div>
+  	<div id="dashboard-planner" class="StudentPlanner__Container"></div>
+  	<div id="dashboard-activity" class="ic-Dashboard-Activity">
+		<article class="media content-section">
+		 	<div class="media-body">
+		    	<div class="article-metadata">
+		      		<a class="mr-2"><h2>{{ object.name }}</h2></a>
+		      		 <!--object width="400" height="400" data="object.file.url">{{object.description}}</object-->
+		      		 <p>{{object.description}}</p>
+		      		 
+		  		</div>
+		  		{% if not user.email|split %}
+		  		<form method="POST" style="background-color:" enctype="multipart/form-data" action="{% url 'assignmentsubmit' %}">
+					{% csrf_token %}
+					<fieldset class="form-group">
+						<legend class="broder-bottom mb-4"><h3>Submit Assignment</h3></legend>
+						{{a_form|crispy}}
+					</fieldset>
+					<div class="form-group">
+						<button class="btn btn-outline-info" type="submit">Submit</button>
+					</div>
+				</form>
+				{% endif %}
+		  	</div>
+		</article>
+  	</div>
+{% endblock content%}

@@ -1,0 +1,209 @@
+
+<!--SHIB-1-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="/idp/css/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/idp/css/bootstrap/normalize.css">
+        <style>
+
+
+@font-face {
+    font-family: adobe-garamond-pro;
+    src: url("/idp/fonts/AGaramondPro-Regular.otf") format("opentype");
+}
+        	/* Extra small devices (phones, 600px and down) */
+
+        			@media only screen and (max-width: 600px) {
+        				body {
+        					background: linear-gradient( rgba(75, 46, 131, 0.71), rgba(75, 46, 131, 0.71));
+        					background-size: 300px;
+        					background-position-x: 10%;
+        					background-position-y: 10%;
+        					font-family: 'adobe-garamond-pro', serif;
+        				}
+
+        				.login-container {
+                         top: 25px;
+                         position: relative;
+                         }
+
+
+        			}
+        			/* Small devices (portrait tablets and large phones, 600px and up) */
+
+        			@media only screen and (min-width: 600px) {
+        				body {
+        					background: linear-gradient( rgba(75, 46, 131, 0.71), rgba(75, 46, 131, 0.71));
+        					background-size: 300px;
+        					background-position-x: 10%;
+        					background-position-y: 10%;
+        					font-family: 'adobe-garamond-pro', serif;
+        				}
+
+        				.login-container {
+                         top: 50px;
+                         position: relative;
+                         }
+
+
+        			}
+        			/* Medium devices (landscape tablets, 768px and up) */
+
+        			@media only screen and (min-width: 768px) {
+        				body {
+        					background: linear-gradient( rgba(75, 46, 131, 0.71), rgba(75, 46, 131, 0.71)), url(/idp/images/logo1.png);
+        					background-size: 300px;
+        					background-position-x: 10%;
+        					background-position-y: 10%;
+        					font-family: 'adobe-garamond-pro', serif;
+        				}
+
+        				.login-container {
+                           top: 100px;
+                           position: relative;
+                         }
+
+        			}
+
+
+
+        			img.logo {
+        				max-width: 280px;
+        				height: auto;
+        				margin: 20px;
+        				width: 100%;
+        			}
+        			.card {
+        				padding: 15px;
+        				border-top: 3px solid #4b2e83;
+        				border-radius: 0px !important;
+        				max-width: 450px;
+        				margin-left: auto;
+        				margin-right: auto;
+        			}
+        			.form-control {
+        				color: #000000;
+        			}
+        			input {
+        				height: 40px !important;
+        				/* max-width: 292px; */
+        				font-size: 20px !important;
+        			}
+        			.btn {
+        				background-color: #4b2e83;
+        				border: none;
+        			}
+        			.validation-message {
+        				color: red;
+        				display: none;
+        			}
+        			a {
+        				color: #757575;
+        			}
+        			label {
+        				color: #4b2e83;
+        				font-size: 1.2rem;
+        			}
+                    .bottom-links{
+
+                       padding-left:20px;
+                       padding-right:20px;
+                    }
+                    .form-check-label{
+                        margin-top: 12px;
+                        font-size: 1em;
+                    }
+
+                    .login-error p{
+
+                    color:#e62020;
+
+                    }
+                    img.vendor-logo {
+                        max-width: 150px;
+                      
+                    }
+
+                    .vendor-logo-container{
+                    margin-top:40px;
+                    margin-bottom:20px;
+                    }
+        </style>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122626835-2"></script>
+        <script>
+           window.dataLayer = window.dataLayer || [];
+           function gtag(){dataLayer.push(arguments);}
+           gtag('js', new Date());
+           gtag('config', 'UA-122626835-2');
+        </script>
+
+    </head>
+<body>
+      <div class="container h-100 login-container">
+         <div class="row align-items-center h-100">
+            <div class="col mx-auto">
+               <div class="card shadow">
+                  <div class="card-body">
+				   <div class="alert" id="alert"></div>
+                     <!--img src="transparentlogo.png" alt="Replace or remove this logo" class="logo mx-auto  d-block"-->
+                        <div>
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div  class="alert alert-{{message.tags}}">
+                                        {{message}}
+                                    </div>
+                                {% endfor %}
+                            {% endif%}
+                            {% block content %}{% endblock content %}
+                        </div>          
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+
+   </body>
+    <script src="/idp/js/jquery-3.3.1.min.js"></script>
+<script>
+
+
+$.getJSON( "https://notifications.bridgeport.edu/api/?app=sso-login-page&key=mzWg4Qq92LkbdJX2SgHT", function( data ) {
+	if(data.isactive == 1)
+	{
+		if(data.priority == 1)
+		{
+			$( ".alert" ).addClass( "alert-danger" );
+			$( ".alert" ).append( "<strong>Alert!</strong> " + data.message);
+			$( ".alert" ).show();
+		}
+		else if(data.priority == 2)
+		{
+			$( ".alert" ).addClass( "alert-warning" );
+			$( ".alert" ).append( "<strong>Warning!</strong> " + data.message);
+			$( ".alert" ).show();
+		}
+		else if(data.priority == 3)
+		{
+			$( ".alert" ).addClass( "alert-info" );
+			$( ".alert" ).append( "<strong>Information!</strong> " + data.message);
+			$( ".alert" ).show();
+		}
+	}
+	else
+	{
+		$( ".alert" ).hide();
+	}
+  
+});
+</script>
+</html>

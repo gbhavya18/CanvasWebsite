@@ -1,0 +1,14 @@
+{% extends "dashboard/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+		<form method="POST" style="background-color:white">
+			{% csrf_token %}
+			<fieldset class="form-group">
+				<legend class="broder-bottom mb-4"><h3>Grading</h3></legend>
+				{{form|crispy}}
+			</fieldset>
+			<div class="form-group">
+				<button class="btn btn-outline-info" type="submit">Submit</button>
+			</div>
+		</form>
+{% endblock content%}

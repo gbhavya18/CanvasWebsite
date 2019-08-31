@@ -1,0 +1,17 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+	<div id="dashboard_header_container" class="ic-Dashboard-header">
+		<h1 class="ic-Dashboard-header__title">Assignments</h1>
+	</div>
+  	<div id="dashboard-planner" class="StudentPlanner__Container"></div>
+  	<div id="dashboard-activity" class="ic-Dashboard-Activity">
+    {% for assignment in assignments %}
+		<article class="media content-section">
+		 	<div class="media-body">
+		    	<h3><a class="article-title" href="{% url 'users:assignmentdetail' assignment.id %}">{{ assignment.name }}</a></h3>
+		    	
+		  	</div>
+		</article>
+	{% endfor %}
+  	</div>
+{% endblock content%}

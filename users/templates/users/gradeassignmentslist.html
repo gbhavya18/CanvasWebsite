@@ -1,0 +1,27 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+	<div id="dashboard_header_container" class="ic-Dashboard-header">
+		<h1 class="ic-Dashboard-header__title">Grades</h1>
+	</div>
+  	<div id="dashboard-planner" class="StudentPlanner__Container"></div>
+  	<div id="dashboard-activity" class="ic-Dashboard-Activity">
+		<article class="media content-section">
+		 	<div class="media-body">
+		 		<table style="width:70%">
+		 			<tr>
+    					<th><h2><a class="article-title">ASSIGNMENT</a></h2></th>
+    					<th><h2><a class="article-title">COURSE</a></h2></th>
+    					<th><h2><a class="article-title">GRADE</a></h2></th>
+  					</tr>
+  					{% for gradeassignment in gradeassignments %}
+  					<tr>
+		    			<th><h3><a style="color: black;">{{ gradeassignment.assignment }}</a></h2></th>	
+		    			<th><h3><a style="color: black;">{{ gradeassignment.course }}</a></h2></th>
+		    			<th><h3><a style="color: black;">{{ gradeassignment.grade }}</a></h2></th>
+		    		</tr>	
+		    		{% endfor %}
+		    	</table>
+		  	</div>
+		</article>
+  	</div>
+{% endblock content%}
